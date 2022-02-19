@@ -1,14 +1,11 @@
 import { config, list } from "@keystone-6/core";
-import { text } from "@keystone-6/core/fields";
-import { Lists } from ".keystone/types";
+import { Header } from "./models/header";
+import { Collage } from "./models/collage";
 
-const Post: Lists.Post = list({
-  fields: {
-    title: text({ validation: { isRequired: true } }),
-    slug: text({ isIndexed: "unique", isFilterable: true }),
-    content: text(),
-  },
-});
+const lists = {
+  Header,
+  Collage,
+};
 
 export default config({
   db: { provider: "sqlite", url: "file:./app.db" },
@@ -16,5 +13,12 @@ export default config({
     generateNextGraphqlAPI: true,
     generateNodeAPI: true,
   },
-  lists: { Post },
+  lists: lists,
+  images: {
+    upload: "local",
+    local: {
+      storagePath: "public/images",
+      baseUrl: "/images",
+    },
+  },
 });

@@ -11,9 +11,24 @@ generator client {
   output   = "node_modules/.prisma/client"
 }
 
-model Post {
-  id      String @id @default(cuid())
-  title   String @default("")
-  slug    String @unique @default("")
-  content String @default("")
+model Header {
+  id             String  @id @default(cuid())
+  text           String  @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  logo_filesize  Int?
+  logo_extension String?
+  logo_width     Int?
+  logo_height    Int?
+  logo_mode      String?
+  logo_id        String?
+}
+
+model Collage {
+  id              String  @id @default(cuid())
+  text            String  @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  image_filesize  Int?
+  image_extension String?
+  image_width     Int?
+  image_height    Int?
+  image_mode      String?
+  image_id        String?
 }
