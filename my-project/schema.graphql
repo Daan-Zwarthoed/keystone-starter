@@ -98,26 +98,6 @@ input CollageWhereUniqueInput {
   id: ID
 }
 
-type LocalImageFieldOutput implements ImageFieldOutput {
-  id: ID!
-  filesize: Int!
-  width: Int!
-  height: Int!
-  extension: ImageExtension!
-  ref: String!
-  url: String!
-}
-
-type CloudImageFieldOutput implements ImageFieldOutput {
-  id: ID!
-  filesize: Int!
-  width: Int!
-  height: Int!
-  extension: ImageExtension!
-  ref: String!
-  url: String!
-}
-
 input CollageWhereInput {
   AND: [CollageWhereInput!]
   OR: [CollageWhereInput!]
@@ -140,6 +120,146 @@ input CollageUpdateArgs {
 }
 
 input CollageCreateInput {
+  text: JSON
+  image: ImageFieldInput
+}
+
+type Landing {
+  id: ID!
+  text: Landing_text_Document
+  background: ImageFieldOutput
+}
+
+type Landing_text_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input LandingWhereUniqueInput {
+  id: ID
+}
+
+input LandingWhereInput {
+  AND: [LandingWhereInput!]
+  OR: [LandingWhereInput!]
+  NOT: [LandingWhereInput!]
+  id: IDFilter
+}
+
+input LandingOrderByInput {
+  id: OrderDirection
+}
+
+input LandingUpdateInput {
+  text: JSON
+  background: ImageFieldInput
+}
+
+input LandingUpdateArgs {
+  where: LandingWhereUniqueInput!
+  data: LandingUpdateInput!
+}
+
+input LandingCreateInput {
+  text: JSON
+  background: ImageFieldInput
+}
+
+type AboutMe {
+  id: ID!
+  text: AboutMe_text_Document
+  image: ImageFieldOutput
+}
+
+type AboutMe_text_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input AboutMeWhereUniqueInput {
+  id: ID
+}
+
+input AboutMeWhereInput {
+  AND: [AboutMeWhereInput!]
+  OR: [AboutMeWhereInput!]
+  NOT: [AboutMeWhereInput!]
+  id: IDFilter
+}
+
+input AboutMeOrderByInput {
+  id: OrderDirection
+}
+
+input AboutMeUpdateInput {
+  text: JSON
+  image: ImageFieldInput
+}
+
+input AboutMeUpdateArgs {
+  where: AboutMeWhereUniqueInput!
+  data: AboutMeUpdateInput!
+}
+
+input AboutMeCreateInput {
+  text: JSON
+  image: ImageFieldInput
+}
+
+type Carrousel {
+  id: ID!
+  text: Carrousel_text_Document
+  image: ImageFieldOutput
+}
+
+type Carrousel_text_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input CarrouselWhereUniqueInput {
+  id: ID
+}
+
+type LocalImageFieldOutput implements ImageFieldOutput {
+  id: ID!
+  filesize: Int!
+  width: Int!
+  height: Int!
+  extension: ImageExtension!
+  ref: String!
+  url: String!
+}
+
+type CloudImageFieldOutput implements ImageFieldOutput {
+  id: ID!
+  filesize: Int!
+  width: Int!
+  height: Int!
+  extension: ImageExtension!
+  ref: String!
+  url: String!
+}
+
+input CarrouselWhereInput {
+  AND: [CarrouselWhereInput!]
+  OR: [CarrouselWhereInput!]
+  NOT: [CarrouselWhereInput!]
+  id: IDFilter
+}
+
+input CarrouselOrderByInput {
+  id: OrderDirection
+}
+
+input CarrouselUpdateInput {
+  text: JSON
+  image: ImageFieldInput
+}
+
+input CarrouselUpdateArgs {
+  where: CarrouselWhereUniqueInput!
+  data: CarrouselUpdateInput!
+}
+
+input CarrouselCreateInput {
   text: JSON
   image: ImageFieldInput
 }
@@ -168,6 +288,33 @@ type Mutation {
   updateCollages(data: [CollageUpdateArgs!]!): [Collage]
   deleteCollage(where: CollageWhereUniqueInput!): Collage
   deleteCollages(where: [CollageWhereUniqueInput!]!): [Collage]
+  createLanding(data: LandingCreateInput!): Landing
+  createLandings(data: [LandingCreateInput!]!): [Landing]
+  updateLanding(
+    where: LandingWhereUniqueInput!
+    data: LandingUpdateInput!
+  ): Landing
+  updateLandings(data: [LandingUpdateArgs!]!): [Landing]
+  deleteLanding(where: LandingWhereUniqueInput!): Landing
+  deleteLandings(where: [LandingWhereUniqueInput!]!): [Landing]
+  createAboutMe(data: AboutMeCreateInput!): AboutMe
+  createAboutMes(data: [AboutMeCreateInput!]!): [AboutMe]
+  updateAboutMe(
+    where: AboutMeWhereUniqueInput!
+    data: AboutMeUpdateInput!
+  ): AboutMe
+  updateAboutMes(data: [AboutMeUpdateArgs!]!): [AboutMe]
+  deleteAboutMe(where: AboutMeWhereUniqueInput!): AboutMe
+  deleteAboutMes(where: [AboutMeWhereUniqueInput!]!): [AboutMe]
+  createCarrousel(data: CarrouselCreateInput!): Carrousel
+  createCarrousels(data: [CarrouselCreateInput!]!): [Carrousel]
+  updateCarrousel(
+    where: CarrouselWhereUniqueInput!
+    data: CarrouselUpdateInput!
+  ): Carrousel
+  updateCarrousels(data: [CarrouselUpdateArgs!]!): [Carrousel]
+  deleteCarrousel(where: CarrouselWhereUniqueInput!): Carrousel
+  deleteCarrousels(where: [CarrouselWhereUniqueInput!]!): [Carrousel]
 }
 
 type Query {
@@ -187,6 +334,30 @@ type Query {
   ): [Collage!]
   collage(where: CollageWhereUniqueInput!): Collage
   collagesCount(where: CollageWhereInput! = {}): Int
+  landings(
+    where: LandingWhereInput! = {}
+    orderBy: [LandingOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Landing!]
+  landing(where: LandingWhereUniqueInput!): Landing
+  landingsCount(where: LandingWhereInput! = {}): Int
+  aboutMes(
+    where: AboutMeWhereInput! = {}
+    orderBy: [AboutMeOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [AboutMe!]
+  aboutMe(where: AboutMeWhereUniqueInput!): AboutMe
+  aboutMesCount(where: AboutMeWhereInput! = {}): Int
+  carrousels(
+    where: CarrouselWhereInput! = {}
+    orderBy: [CarrouselOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Carrousel!]
+  carrousel(where: CarrouselWhereUniqueInput!): Carrousel
+  carrouselsCount(where: CarrouselWhereInput! = {}): Int
   keystone: KeystoneMeta!
 }
 

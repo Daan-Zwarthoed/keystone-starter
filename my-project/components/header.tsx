@@ -13,28 +13,32 @@ type Header = {
 };
 
 export default function Header({ header }: { header: Header }) {
-    return (
-        <div className="fixed top-0 left-0 w-screen bg-red-400 h-12 p-2 flex flex-row justify-between">
+    if (header && header.logo && header.text) return (
+        <div className="fixed z-50 top-0 left-0 w-screen bg-red-400 h-12 p-2 flex flex-row justify-between">
             <div className="flex flex-row">
                 {header.logo &&
                     <div className="h-full block w-32 relative" >
-                        <Image src={header.logo.url} width={header.logo.width} height={header.logo.height} layout='fill'
-                            objectFit='contain' objectPosition="left" alt="test" />
+                        <Image src={header.logo.url} layout='fill'
+                            objectFit='contain' objectPosition="left" alt="logo" />
                     </div>
                 }
                 {header.text.document &&
                     <DocumentRenderer document={header.text.document} />
                 }
             </div>
-            <nav>
-                <ul>
+            <nav className="flex justify-center">
+                <ul className="flex flex-row align-center w-80">
                     {header.nav.map(navItem => (
-                        <div className="m-1 w-80 flex flex-col center" key={navItem}>
-                            {navItem}
-                        </div>
+                        <li id={"-" + navItem} className="mr-4 flex items-center cursor-pointer" onClick={(event) => {
+                            const titel = document.getElementById((event.target as any).id.slice(1)) as HTMLElement;
+                            if (titel) scrollTo({ behavior: "smooth", top: titel.offsetTop - 50 });
+                        }} key={navItem}>
+                            {(navItem.charAt(0).toUpperCase() + navItem.slice(1)).replace("-", " ")}
+                        </li>
                     ))}
                 </ul>
             </nav>
         </div>
     );
+    return null;
 }
