@@ -14,7 +14,7 @@ type Landing = {
 
 export default function Landing({ landing }: { landing: Landing }) {
     if (landing && landing.background && landing.text) return (
-        <div className="relative w-screen h-screen overflow-hidden">
+        <div className="relative w-screen max-h-screen overflow-hidden">
             <div className="absolute w-fit h-fit bg-red-500/50 p-5 z-10 inset-2/4 -translate-x-2/4 -translate-y-2/4">
                 <DocumentRenderer document={landing.text.document} />
             </div>

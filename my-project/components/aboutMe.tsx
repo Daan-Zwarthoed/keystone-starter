@@ -14,9 +14,9 @@ type AboutMe = {
 
 export default function AboutMe({ aboutMe }: { aboutMe: AboutMe }) {
     if (aboutMe && aboutMe.image && aboutMe.text) return (
-        <div>
+        <div className="m-4">
             <h1 id="over-mij">Over mij</h1>
-            <div className="relative w-100% m-20 flex flex-row  overflow-hidden">
+            <div className="relative w-100% flex flex-row flex-wrap tablet:flex-nowrap overflow-hidden">
                 <div className="w-full">
                     <DocumentRenderer document={aboutMe.text.document} />
                 </div>
