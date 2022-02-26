@@ -1,11 +1,13 @@
 // Import the generated Lists API and types from Keystone
 import { query } from '.keystone/api';
-import Header from '../components/header'
-import Landing from '../components/landing'
-import AboutMe from '../components/aboutMe'
-import Collage from '../components/collage'
-import Carrousel from '../components/carrousel'
-import Contact from '../components/contact'
+import type { KeystoneContext } from '@keystone-6/core/types';
+import Header from './components/header'
+import Landing from './components/landing'
+import AboutMe from './components/aboutMe'
+import Collage from './components/collage'
+import Carrousel from './components/carrousel'
+import Contact from './components/contact'
+import { GetStaticPropsContext } from 'next';
 
 
 
@@ -41,20 +43,16 @@ export default function Home({ header, nav, landing, aboutMe, collage, carrousel
 // Here we use the Lists API to load all the posts we want to display
 // The return of this function is provided to the `Home` component
 export async function getStaticProps() {
+
+
   const header = await query.Header.findMany({ query: 'id text{document} logo{url width height}' })
   const landing = await query.Landing.findMany({ query: 'id text{document} background{url width height}' })
   const aboutMe = await query.AboutMe.findMany({ query: 'id text{document} image{url width height}' })
   const collage = await query.Collage.findMany({ query: 'id text{document} image{url width height}' })
   const carrousel = await query.Carrousel.findMany({ query: 'id text{document} image{url width height}' })
   const contact = await query.Contact.findMany({ query: 'id text{document} logo{url width height} contactForm' })
-  // await query.ContactForm.createOne({
-  //   data: {
-  //     name: "test",
-  //     email: "hello",
-  //     message: "another test",
-  //   },
-  //   query: 'name email message',
-  // });
+  console.log('test');
+
   const nav = ["over-mij", "collage", "carrousel", "contact"];
 
   return {

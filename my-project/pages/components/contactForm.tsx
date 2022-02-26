@@ -1,15 +1,13 @@
-import Image from 'next/image';
-import { DocumentRenderer } from '@keystone-6/document-renderer';
 import { query } from '.keystone/api';
-// import { context } from '.keystone/carrousels';
+import { Context } from '.keystone/types';
 
-import type { KeystoneContext } from '@keystone-6/core/types';
+import { gql } from "@apollo/client";
+import client from "@apollo/client";
 
 function handleSubmit(event: any) {
-    event.preventDefault()
     console.log(event);
     console.log(event.target.name.value);
-
+    // console.log(query);
 
     // query.ContactForm.createOne({
     //     data: {
@@ -24,7 +22,7 @@ function handleSubmit(event: any) {
 export default function ContactForm({ contactFormExists }: { contactFormExists: any }) {
     if (contactFormExists) return (
         <div className="m-4">
-            <form className="flex flex-col" onSubmit={(event) => handleSubmit(event)}>
+            <form className="flex flex-col" action="/" onSubmit={(event) => handleSubmit(event)}>
                 <label htmlFor="name">Naam:</label>
                 <input className="border-solid border-2" type="text" id="name" name="name" />
                 <label htmlFor="email">Email:</label>
