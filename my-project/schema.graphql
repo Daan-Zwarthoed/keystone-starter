@@ -218,26 +218,6 @@ input CarrouselWhereUniqueInput {
   id: ID
 }
 
-type LocalImageFieldOutput implements ImageFieldOutput {
-  id: ID!
-  filesize: Int!
-  width: Int!
-  height: Int!
-  extension: ImageExtension!
-  ref: String!
-  url: String!
-}
-
-type CloudImageFieldOutput implements ImageFieldOutput {
-  id: ID!
-  filesize: Int!
-  width: Int!
-  height: Int!
-  extension: ImageExtension!
-  ref: String!
-  url: String!
-}
-
 input CarrouselWhereInput {
   AND: [CarrouselWhereInput!]
   OR: [CarrouselWhereInput!]
@@ -262,6 +242,149 @@ input CarrouselUpdateArgs {
 input CarrouselCreateInput {
   text: JSON
   image: ImageFieldInput
+}
+
+type Contact {
+  id: ID!
+  text: Contact_text_Document
+  logo: ImageFieldOutput
+  contactForm: Boolean!
+}
+
+type Contact_text_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
+}
+
+input ContactWhereUniqueInput {
+  id: ID
+}
+
+type LocalImageFieldOutput implements ImageFieldOutput {
+  id: ID!
+  filesize: Int!
+  width: Int!
+  height: Int!
+  extension: ImageExtension!
+  ref: String!
+  url: String!
+}
+
+type CloudImageFieldOutput implements ImageFieldOutput {
+  id: ID!
+  filesize: Int!
+  width: Int!
+  height: Int!
+  extension: ImageExtension!
+  ref: String!
+  url: String!
+}
+
+input ContactWhereInput {
+  AND: [ContactWhereInput!]
+  OR: [ContactWhereInput!]
+  NOT: [ContactWhereInput!]
+  id: IDFilter
+  contactForm: BooleanFilter
+}
+
+input BooleanFilter {
+  equals: Boolean
+  not: BooleanFilter
+}
+
+input ContactOrderByInput {
+  id: OrderDirection
+  contactForm: OrderDirection
+}
+
+input ContactUpdateInput {
+  text: JSON
+  logo: ImageFieldInput
+  contactForm: Boolean
+}
+
+input ContactUpdateArgs {
+  where: ContactWhereUniqueInput!
+  data: ContactUpdateInput!
+}
+
+input ContactCreateInput {
+  text: JSON
+  logo: ImageFieldInput
+  contactForm: Boolean! = true
+}
+
+type ContactForm {
+  id: ID!
+  name: String
+  email: String
+  message: String
+}
+
+input ContactFormWhereUniqueInput {
+  id: ID
+}
+
+input ContactFormWhereInput {
+  AND: [ContactFormWhereInput!]
+  OR: [ContactFormWhereInput!]
+  NOT: [ContactFormWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  email: StringFilter
+  message: StringFilter
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input ContactFormOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  email: OrderDirection
+  message: OrderDirection
+}
+
+input ContactFormUpdateInput {
+  name: String
+  email: String
+  message: String
+}
+
+input ContactFormUpdateArgs {
+  where: ContactFormWhereUniqueInput!
+  data: ContactFormUpdateInput!
+}
+
+input ContactFormCreateInput {
+  name: String
+  email: String
+  message: String
 }
 
 """
@@ -315,6 +438,24 @@ type Mutation {
   updateCarrousels(data: [CarrouselUpdateArgs!]!): [Carrousel]
   deleteCarrousel(where: CarrouselWhereUniqueInput!): Carrousel
   deleteCarrousels(where: [CarrouselWhereUniqueInput!]!): [Carrousel]
+  createContact(data: ContactCreateInput!): Contact
+  createContacts(data: [ContactCreateInput!]!): [Contact]
+  updateContact(
+    where: ContactWhereUniqueInput!
+    data: ContactUpdateInput!
+  ): Contact
+  updateContacts(data: [ContactUpdateArgs!]!): [Contact]
+  deleteContact(where: ContactWhereUniqueInput!): Contact
+  deleteContacts(where: [ContactWhereUniqueInput!]!): [Contact]
+  createContactForm(data: ContactFormCreateInput!): ContactForm
+  createContactForms(data: [ContactFormCreateInput!]!): [ContactForm]
+  updateContactForm(
+    where: ContactFormWhereUniqueInput!
+    data: ContactFormUpdateInput!
+  ): ContactForm
+  updateContactForms(data: [ContactFormUpdateArgs!]!): [ContactForm]
+  deleteContactForm(where: ContactFormWhereUniqueInput!): ContactForm
+  deleteContactForms(where: [ContactFormWhereUniqueInput!]!): [ContactForm]
 }
 
 type Query {
@@ -358,6 +499,22 @@ type Query {
   ): [Carrousel!]
   carrousel(where: CarrouselWhereUniqueInput!): Carrousel
   carrouselsCount(where: CarrouselWhereInput! = {}): Int
+  contacts(
+    where: ContactWhereInput! = {}
+    orderBy: [ContactOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Contact!]
+  contact(where: ContactWhereUniqueInput!): Contact
+  contactsCount(where: ContactWhereInput! = {}): Int
+  contactForms(
+    where: ContactFormWhereInput! = {}
+    orderBy: [ContactFormOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [ContactForm!]
+  contactForm(where: ContactFormWhereUniqueInput!): ContactForm
+  contactFormsCount(where: ContactFormWhereInput! = {}): Int
   keystone: KeystoneMeta!
 }
 

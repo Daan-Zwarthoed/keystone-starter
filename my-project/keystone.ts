@@ -4,6 +4,8 @@ import { Collage } from "./models/collage";
 import { Landing } from "./models/landing";
 import { AboutMe } from "./models/aboutMe";
 import { Carrousel } from "./models/carrousel";
+import { Contact } from "./models/contact";
+import { ContactForm } from "./models/contactForm";
 
 const lists = {
   Header,
@@ -11,6 +13,8 @@ const lists = {
   Landing,
   AboutMe,
   Carrousel,
+  Contact,
+  ContactForm,
 };
 
 export default config({

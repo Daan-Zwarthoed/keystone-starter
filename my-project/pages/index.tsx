@@ -5,6 +5,8 @@ import Landing from '../components/landing'
 import AboutMe from '../components/aboutMe'
 import Collage from '../components/collage'
 import Carrousel from '../components/carrousel'
+import Contact from '../components/contact'
+
 
 
 type PropsType = {
@@ -14,10 +16,10 @@ type PropsType = {
   nav: string[]
   header: any
   carrousel: any
-
+  contact: any
 }
 // Home receives a `posts` prop from `getStaticProps` below
-export default function Home({ header, nav, landing, aboutMe, collage, carrousel }: PropsType) {
+export default function Home({ header, nav, landing, aboutMe, collage, carrousel, contact }: PropsType) {
   return (
     <main>
       <Header header={{
@@ -30,6 +32,8 @@ export default function Home({ header, nav, landing, aboutMe, collage, carrousel
       <AboutMe aboutMe={aboutMe[0]}></AboutMe>
       <Collage collage={collage}></Collage>
       <Carrousel carrousel={carrousel}></Carrousel>
+      <Contact contact={contact[0]}></Contact>
+
     </main >
   );
 }
@@ -42,8 +46,16 @@ export async function getStaticProps() {
   const aboutMe = await query.AboutMe.findMany({ query: 'id text{document} image{url width height}' })
   const collage = await query.Collage.findMany({ query: 'id text{document} image{url width height}' })
   const carrousel = await query.Carrousel.findMany({ query: 'id text{document} image{url width height}' })
-
-  const nav = ["over-mij", "collage", "carrousel"];
+  const contact = await query.Contact.findMany({ query: 'id text{document} logo{url width height} contactForm' })
+  // await query.ContactForm.createOne({
+  //   data: {
+  //     name: "test",
+  //     email: "hello",
+  //     message: "another test",
+  //   },
+  //   query: 'name email message',
+  // });
+  const nav = ["over-mij", "collage", "carrousel", "contact"];
 
   return {
     props: {
@@ -52,6 +64,7 @@ export async function getStaticProps() {
       aboutMe,
       collage,
       carrousel,
+      contact,
       nav
     }
   };

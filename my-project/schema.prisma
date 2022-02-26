@@ -65,3 +65,22 @@ model Carrousel {
   image_mode      String?
   image_id        String?
 }
+
+model Contact {
+  id             String  @id @default(cuid())
+  text           String  @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  logo_filesize  Int?
+  logo_extension String?
+  logo_width     Int?
+  logo_height    Int?
+  logo_mode      String?
+  logo_id        String?
+  contactForm    Boolean @default(true)
+}
+
+model ContactForm {
+  id      String @id @default(cuid())
+  name    String @default("")
+  email   String @default("")
+  message String @default("")
+}
