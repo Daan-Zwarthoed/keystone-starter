@@ -24,7 +24,7 @@ export const Header: Lists.Header = list({
   ui: {
     hideCreate: async ({ session, context }: PrismaContext | any) =>
       (await context.prisma.header.count()) === 0 ? false : true,
-    hideDelete: true,
+    // hideDelete: true,
     listView: {
       initialColumns: ["text", "logo"],
     },

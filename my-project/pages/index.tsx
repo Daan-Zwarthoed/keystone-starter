@@ -1,12 +1,12 @@
 // Import the generated Lists API and types from Keystone
 import { query } from '.keystone/api';
 import type { KeystoneContext } from '@keystone-6/core/types';
-import Header from './components/header'
-import Landing from './components/landing'
-import AboutMe from './components/aboutMe'
-import Collage from './components/collage'
-import Carrousel from './components/carrousel'
-import Contact from './components/contact'
+import Header from '../components/header'
+import Landing from '../components/landing'
+import AboutMe from '../components/aboutMe'
+import Collage from '../components/collage'
+import Carrousel from '../components/carrousel'
+import Contact from '../components/contact'
 import { GetStaticPropsContext } from 'next';
 
 
@@ -62,7 +62,6 @@ export async function getStaticProps() {
   const collage = await query.Collage.findMany({ query: 'id text{document} image{url width height}' })
   const carrousel = await query.Carrousel.findMany({ query: 'id text{document} image{url width height}' })
   const contact = await query.Contact.findMany({ query: 'id text{document} logo{url width height} contactForm' })
-  console.log('test');
 
   const nav = ["over-mij", "collage", "carrousel", "contact"];
 
