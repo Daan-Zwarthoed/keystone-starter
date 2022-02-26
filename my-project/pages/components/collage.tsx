@@ -13,7 +13,8 @@ type CollageItem = {
 };
 
 export default function Collage({ collage }: { collage: CollageItem[] }) {
-    if (collage.length > 0 && collage[0].image && collage[0].text) return (
+    if (collage.length <= 0) return null;
+    if (collage[0].image && collage[0].text) return (
         <div className="m-4">
             <h1 id="collage">Collage</h1>
             <div className="flex flex-row flex-wrap items-center justify-center">

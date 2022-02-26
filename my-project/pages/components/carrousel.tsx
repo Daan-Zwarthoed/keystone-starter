@@ -45,7 +45,8 @@ const handleClick = (left: boolean) => {
 }
 
 export default function Carrousel({ carrousel }: { carrousel: CarrouselItem[] }) {
-    if (carrousel.length > 0 && carrousel[0].image && carrousel[0].text) return (
+    if (carrousel.length <= 0) return null;
+    if (carrousel[0].image && carrousel[0].text) return (
         <div className="w-screen">
             <h1 id="carrousel">Carrousel</h1>
             <div className="relative w-screen overflow-hidden h-max">

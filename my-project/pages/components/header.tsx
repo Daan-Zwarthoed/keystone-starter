@@ -13,7 +13,7 @@ type Header = {
 };
 
 export default function Header({ header }: { header: Header }) {
-    if (header && header.logo && header.text) return (
+    if (header.logo || header.text || header.nav.length) return (
         <div className="fixed z-50 top-0 left-0 w-screen bg-red-400 h-12 p-2 flex flex-row justify-between">
             <div className="flex flex-row">
                 {header.logo &&

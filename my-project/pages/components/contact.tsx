@@ -14,7 +14,7 @@ type contact = {
 };
 
 export default function Contact({ contact }: { contact: contact }) {
-    if (contact && contact.logo && contact.text) return (
+    if (contact) return (
         <div className="m-4">
             <h1 id="contact">contact</h1>
             <div className="flex flex-row flex-wrap items-center justify-center">

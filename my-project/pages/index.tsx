@@ -24,18 +24,29 @@ type PropsType = {
 export default function Home({ header, nav, landing, aboutMe, collage, carrousel, contact }: PropsType) {
   return (
     <main>
-      <Header header={{
-        id: header[0].id,
-        logo: header[0].logo,
-        text: header[0].text,
-        nav: nav,
-      }}></Header>
-      < Landing landing={landing[0]}></Landing>
-      <AboutMe aboutMe={aboutMe[0]}></AboutMe>
-      <Collage collage={collage}></Collage>
-      <Carrousel carrousel={carrousel}></Carrousel>
-      <Contact contact={contact[0]}></Contact>
-
+      {header.length > 0 &&
+        <Header header={{
+          id: header[0].id,
+          logo: header[0].logo,
+          text: header[0].text,
+          nav: nav,
+        }}></Header>
+      }
+      {landing.length > 0 &&
+        < Landing landing={landing[0]}></Landing>
+      }
+      {aboutMe.length > 0 &&
+        <AboutMe aboutMe={aboutMe[0]}></AboutMe>
+      }
+      {collage.length > 0 &&
+        <Collage collage={collage}></Collage>
+      }
+      {carrousel.length > 0 &&
+        <Carrousel carrousel={carrousel}></Carrousel>
+      }
+      {contact.length > 0 &&
+        <Contact contact={contact[0]}></Contact>
+      }
     </main >
   );
 }
